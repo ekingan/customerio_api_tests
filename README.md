@@ -14,9 +14,9 @@
 
 `rspec --init`
 
-# this will creates the files
-# .rspec
-# spec/spec_helper.rb`
+#### this will create the files
+#### .rspec
+#### spec/spec_helper.rb`
 
 ### To run tests:
 
