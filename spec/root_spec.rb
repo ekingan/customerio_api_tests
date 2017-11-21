@@ -1,11 +1,13 @@
 require 'spec_helper'
 require 'net/http'
 
-RSpec.describe "Root route", :type => :request do
+RSpec.describe "Metric API Root route", :type => :request do
+
   let(:uri) { URI.parse('http://emily-cio-homework.getsandbox.com/')}
-  describe "Get root route" do
+  let(:response) { Net::HTTP.get_response(uri) }
+
+  describe "Retrieve the entry point [GET]" do
     it "should successfully return a json object" do
-      response = Net::HTTP.get_response(uri)
       expect(response.content_type).to eq('application/json')
       expect(response.code).to eq('200')
     end
