@@ -1,15 +1,23 @@
-## To run tests you must install the following gems
+# This repo contains tests for an external API
+
+## First clone or download the repo
+
+### Within your project directory, install the rspec gem
 
 `gem install rspec`
+
+### Then install the rspec expectations gem
+
 `gem install rspec-expectations`
 
-## To initialize rspec
+### Initialize rspec by entering
 
 `rspec --init`
 
-# it creates files
+# this will creates the files
 # .rspec
 # spec/spec_helper.rb`
 
-## To run tests:
+### To run tests:
+
 `rspec spec`
