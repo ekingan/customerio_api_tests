@@ -1,4 +1,4 @@
-# This repo contains tests for an external API
+# This repo contains tests for an external API provided by customer io 
 
 ## First clone or download the repo
 
