@@ -14,7 +14,7 @@
 
 `gem install pry`
 
-### Initialize rspec by entering
+### You may need to initialize rspec by entering
 
 `rspec --init`
 
