@@ -69,7 +69,7 @@ RSpec.describe "Metric Collection [/metrics]", :type => :request do
       request.body = data.to_json
       response = http.request(request)
       expect(response.code).to eq '201'
-      expect(JSON.parse(response.body)).to include(['sent', 'opened'])
+      expect(JSON.parse(response.body)["metrics"]).to eq(['sent', 'opened'])
     end
 
     it "does not allow duplicate users (by email address)" do
