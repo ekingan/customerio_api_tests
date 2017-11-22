@@ -1,7 +1,6 @@
 require 'spec_helper'
 require 'net/http'
 require 'json'
-require 'pry'
 
 RSpec.describe "Metric single user changes [/metrics/{email}]", :type => :request do
 
