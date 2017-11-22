@@ -1,6 +1,6 @@
-# This repo contains tests for an external API provided by customer io 
+# This repo contains tests for a RESTful API using RSPEC.
 
-## First clone or download the repo
+## To run the test, first clone or download the repo
 
 ### Within your project directory, install the rspec gem
 
@@ -10,15 +10,13 @@
 
 `gem install rspec-expectations`
 
+### I have required the pry gem for debugging, install this gem as well
+
+`gem install pry`
+
 ### Initialize rspec by entering
 
 `rspec --init`
-
-#### this will create the files
-
-`.rspec`
-
-`spec/spec_helper.rb`
 
 ### To run tests:
 

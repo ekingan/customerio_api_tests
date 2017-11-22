@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'net/http'
 
 RSpec.describe "Metric API Root route", :type => :request do
 

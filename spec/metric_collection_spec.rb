@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'net/http'
-require 'json'
 
 RSpec.describe "Metric Collection [/metrics]", :type => :request do
 
@@ -44,7 +42,8 @@ RSpec.describe "Metric Collection [/metrics]", :type => :request do
       request.body = data_without_email.to_json
       response = http.request(request)
       expect(response.code).to eq '400'
-      expect(JSON.parse(response.body)).to eq ({"status"=>"error", "details"=>"Missing email"})
+      expect(JSON.parse(response.body)["status"]).to eq "error"
+      expect(JSON.parse(response.body)["details"]).to eq "Missing email"
     end
 
     it "creates a new set of tracked metrics for a user" do
@@ -52,7 +51,7 @@ RSpec.describe "Metric Collection [/metrics]", :type => :request do
       request.body = data.to_json
       response = http.request(request)
       expect(response.code).to eq '201'
-      expect(JSON.parse(response.body)).to include("email" => "earlybird@gmail.com", "metrics" => ['sent', 'delivered', 'opened', 'clicked'])
+      expect(JSON.parse(response.body)["metrics"]).to eq(['sent', 'delivered', 'opened', 'clicked'])
     end
 
     it "does not allow invalid metrics to be tracked" do
@@ -60,8 +59,9 @@ RSpec.describe "Metric Collection [/metrics]", :type => :request do
       request.body = data.to_json
       response = http.request(request)
       expect(response.code).to eq '400'
-      expect(JSON.parse(response.body)).to include("details" => "Invalid metric: vogue. Must be 'sent', 'delivered', 'opened', 'clicked', 'bounced', 'suppressed', or 'spammed'",
-       "status" => "error")
+      expect(JSON.parse(response.body)["status"]).to eq "error"
+      expect(JSON.parse(response.body)["details"]).to eq "Invalid metric: vogue. Must be 'sent', 'delivered', 'opened', 'clicked', 'bounced', 'suppressed', or 'spammed'"
+
     end
 
     it "does not allow duplicate metrics to be tracked" do
@@ -73,11 +73,12 @@ RSpec.describe "Metric Collection [/metrics]", :type => :request do
     end
 
     it "does not allow duplicate users (by email address)" do
-      duplicate_user = {'email' => "tester@example.com", 'metrics' => ['sent']}
+      duplicate_user = {'email' => "tester@example.com", 'metrics' => 'sent'}
       request.body = duplicate_user.to_json
       response = http.request(request)
       expect(response.code).to eq '400'
-      expect(JSON.parse(response.body)).to eq({"status"=>"error", "details"=>"Email tester@example.com already created."})
+      expect(JSON.parse(response.body)["status"]).to eq "error"
+      expect(JSON.parse(response.body)["details"]).to eq "Email tester@example.com already created."
     end
   end
 end
