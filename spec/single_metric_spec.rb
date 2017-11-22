@@ -29,12 +29,10 @@ RSpec.describe "Metric single user changes [/metrics/{email}]", :type => :reques
   describe "Update a Metric [PUT]" do
     it "adds a new metric to a user's tracked metrics" do
       http = Net::HTTP.new(uri.host, uri.port)
-      request = Net::HTTP::Put.new(uri.path, {'Content-Type' => 'application/json'})
-      data = {'email' => 'tester@example.com', 'metrics' => ['sent']}
-      request.body = data.to_json
-      response = http.request(request)
-      # expect(response.code).to eq '201'
-      expect(JSON.parse(response.body)).to include("email" => 'tester@example.com', "metrics" => ['sent', 'delivered', 'opened', 'clicked'])
+      data = {'metric' => 'opened'}
+      response = http.send_request('PUT', uri.path, JSON.dump(data), {'Content-Type' => 'application/json'})
+      expect(response.code).to eq '200'
+      expect(JSON.parse(response.body)).to include("email" => 'tester@example.com', "metrics" => ["sent", "delivered", "opened"])
     end
   end
 

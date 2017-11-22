@@ -64,13 +64,13 @@ RSpec.describe "Metric Collection [/metrics]", :type => :request do
        "status" => "error")
     end
 
-    # it "does not allow duplicate metrics to be tracked" do
-    #   data = {'email' => 'bonjovi@gmail.com', 'metrics' => ['sent', 'opened', 'opened', 'sent']}
-    #   request.body = data.to_json
-    #   response = http.request(request)
-    #   expect(response.code).to eq '201'
-    #   expect(JSON.parse(response.body)).to include(['sent', 'opened'])
-    # end
+    it "does not allow duplicate metrics to be tracked" do
+      data = {'email' => 'bonjovi@gmail.com', 'metrics' => ['sent', 'opened', 'opened', 'sent']}
+      request.body = data.to_json
+      response = http.request(request)
+      expect(response.code).to eq '201'
+      expect(JSON.parse(response.body)).to include(['sent', 'opened'])
+    end
 
     it "does not allow duplicate users (by email address)" do
       duplicate_user = {'email' => "tester@example.com", 'metrics' => ['sent']}
